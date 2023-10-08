@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Event listeners for operator buttons
+    /*Event listeners for operator buttons
     document.querySelectorAll('.operator').forEach(button => {
         button.addEventListener('click', () => {
             if (firstNumber && currentInput) {
@@ -56,17 +56,24 @@ document.addEventListener('DOMContentLoaded', () => {
             currentInput = '';
             currentOperator = button.textContent;
         });
-    });
-
-    /*Event listener for equals button
-    document.getElementById('equals').addEventListener('click', () => {
-        if (currentInput) {
+    });*/
+    // Event listeners for operator buttons
+document.querySelectorAll('.operator').forEach(button => {
+    button.addEventListener('click', () => {
+        if (currentInput && currentOperator) {
             calculationValues.push(firstNumber);
             calculationValues.push(currentOperator);
-            calculationValues.push(currentInput);
+            firstNumber = operate(currentOperator, firstNumber, currentInput).toString();
+            currentInput = '';
+        } else if (!firstNumber && currentInput) {
+            firstNumber = currentInput;
+            currentInput = '';
         }
-        calculate();
-    });*/// Event listener for equals button
+        currentOperator = button.textContent;
+    });
+});
+
+
 document.getElementById('equals').addEventListener('click', () => {
     if (currentOperator && currentInput) {
         calculationValues.push(firstNumber);
